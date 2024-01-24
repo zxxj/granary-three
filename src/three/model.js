@@ -1,7 +1,11 @@
 import * as THREE from 'three'
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 
-const geometry = new THREE.BoxGeometry(100, 100, 100)
-const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 })
-const mesh = new THREE.Mesh(geometry, material)
+const model = new THREE.Group()
 
-export { mesh }
+const loader = new GLTFLoader()
+loader.load('/model.gltf', (gltf) => {
+  model.add(gltf.scene)
+})
+
+export { model }

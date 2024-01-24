@@ -1,8 +1,11 @@
 import * as THREE from 'three'
-import { mesh } from './model'
+import { model } from './model'
 
 const scene = new THREE.Scene()
 
-scene.add(mesh)
+const ambientLight = new THREE.AmbientLight(0xffffff, 1)
+
+scene.add(ambientLight)
+scene.add(model)
 
 export { scene }
