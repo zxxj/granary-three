@@ -11,7 +11,8 @@ const renderer = new THREE.WebGLRenderer({
 })
 renderer.setSize(width, height)
 renderer.setPixelRatio(window.devicePixelRatio) // 设置当前设备的像素比率,防止Canvas画布输出模糊
-renderer.outputColorSpace = THREE.SRGBColorSpace
+renderer.outputColorSpace = THREE.SRGBColorSpace // 解决贴图颜色偏差问题
+renderer.setClearColor(0x005577)
 
 const render = () => {
   window.requestAnimationFrame(render)

@@ -18,5 +18,6 @@ scene.add(directionalLight1)
 scene.add(directionalLight2)
 scene.add(ambientLight)
 scene.add(model)
+scene.fog = new THREE.Fog(0x005577, -100, 1500) // 设置雾化效果,雾的颜色和背景颜色相近,这样在远处看的话网格线会和背景颜色融为一体
 
 export { scene }
