@@ -3,14 +3,14 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { createTag } from './tag'
 
 const model = new THREE.Group()
-
 const loader = new GLTFLoader()
-loader.load('/model.gltf', (gltf) => {
+const granaryArr = [] // 所有粮仓对象的集合, 用于射线拾取
+
+loader.load('/model.glb', (gltf) => {
   const group = gltf.scene.getObjectByName('粮仓')
 
   group.traverse((obj) => {
     if (obj.isMesh) {
-      // console.log(obj.name)
       const label = createTag(obj.name)
       const position = new THREE.Vector3()
       obj.getWorldPosition(position)
@@ -28,12 +28,12 @@ loader.load('/model.gltf', (gltf) => {
       }
 
       label.position.copy(position)
+      granaryArr.push(obj)
       model.add(label)
-      console.log(model)
     }
   })
 
   model.add(gltf.scene)
 })
 
-export { model }
+export { model, granaryArr }
