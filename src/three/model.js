@@ -7,10 +7,18 @@ const loader = new GLTFLoader()
 const granaryArr = [] // 所有粮仓对象的集合, 用于射线拾取
 
 loader.load('/model.glb', (gltf) => {
-  const group = gltf.scene.getObjectByName('粮仓')
+  gltf.scene.traverse((obj) => {
+    if (obj.type === 'Mesh') {
+      obj.material = new THREE.MeshLambertMaterial({
+        map: obj.material.map,
+        color: obj.material.color
+      })
+    }
+  })
 
+  const group = gltf.scene.getObjectByName('粮仓')
   group.traverse((obj) => {
-    if (obj.isMesh) {
+    if (obj.type === 'Mesh') {
       const label = createTag(obj.name)
       const position = new THREE.Vector3()
       obj.getWorldPosition(position)

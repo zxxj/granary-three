@@ -6,11 +6,9 @@ let chooseCurrentMesh = null
 
 const chooseChange = (event) => {
   if (chooseCurrentMesh) {
-    let originalColor = chooseCurrentMesh.userData.originalColor
-    chooseCurrentMesh.material.color.set(originalColor) // 把上次选中mesh设置为原来的颜色
+    chooseCurrentMesh.material.color.set(0xffffff) // 把上次选中的mesh设置为原来的颜色
   }
 
-  console.log(granaryArr)
   let Sx = event.clientX // 鼠标单击位置横坐标
   let Sy = event.clientY // 鼠标单击位置纵坐标
 
@@ -29,14 +27,9 @@ const chooseChange = (event) => {
   let intersects = raycaster.intersectObjects(granaryArr)
 
   if (intersects.length > 0) {
-    if (chooseCurrentMesh) {
-      chooseCurrentMesh.material.color.copy(chooseCurrentMesh.userData.originalColor) // 将上次选中的模型恢复为原始颜色
-    }
     chooseCurrentMesh = intersects[0].object // 直接引用选中的模型
-    chooseCurrentMesh.userData.originalColor = chooseCurrentMesh.material.color.clone() // 保存原始颜色
-    chooseCurrentMesh.material.color.set(0x00ffff) // 选中改变颜色
+    chooseCurrentMesh.material.color.set(0x00ff00) // 选中改变颜色
   }
-  console.log(granaryArr)
 }
 
 window.addEventListener('click', chooseChange)
